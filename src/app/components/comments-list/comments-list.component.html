@@ -1,0 +1,12 @@
+<div class="container mt-2 text-center">
+    <div *ngIf="CommentList">
+          <div class="card mt-2" *ngFor="let c of CommentList">
+            <div class="card-body">
+              <h5 class="card-title">{{c.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{c.id}}</h6>
+              <p class="card-text">{{c.body}}</p>
+              <button [routerLink]="['/comments/' + c.id]" class="btn btn-info">Leggi il post</button>
+              <button [routerLink]="['/comments/group/' + c.postId]" class="btn btn-info d-block mt-1 m-auto" (click)="serviceComment.clickOnPostId()">Leggi post del gruppo</button>
+            </div>
+          </div>
+    </div>

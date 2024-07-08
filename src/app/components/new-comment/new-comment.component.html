@@ -1,0 +1,26 @@
+<h2 class="text-muted">Nuovo Post</h2>
+<form class="border p-2 mt-2 bg-secondary-subtle" (ngSubmit)="SendMyPost()" #IlForm="ngForm">
+    <div class="mb-3">
+        <label for="title" class="form-label">Titolo</label>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Titolo del post" [(ngModel)]="newPost.name" required #inputTitle="ngModel" [ngClass]="{'is-invalid' : inputTitle.invalid && inputTitle.dirty,
+          'is-valid' : inputTitle.valid && inputTitle.dirty
+        }" pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'>
+        <div class="invalid-feedback" *ngIf="inputTitle.invalid">Inserisci un titolo</div>
+      </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="newPost.email" required #inputEmail="ngModel"
+        [ngClass]="{'is-invalid' : inputEmail.invalid && inputEmail.dirty,
+          'is-valid' : inputEmail.valid && inputEmail.dirty
+        }" pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b">
+        <div class="invalid-feedback" *ngIf="inputEmail.invalid">Inserisci un indirizzo email</div>
+      </div>
+      <div class="mb-3">
+        <label for="textarea" class="form-label">Testo</label>
+        <textarea class="form-control" id="textarea" name="textarea" placeholder="Messaggio..." rows="4" [(ngModel)]="newPost.body" required #inputBody="ngModel" [ngClass]="{'is-invalid' : inputBody.invalid && inputBody.dirty,
+        'is-valid' : inputBody.valid && inputBody.dirty
+      }" pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'></textarea>
+              <div class="invalid-feedback" *ngIf="inputBody.invalid">Inserisci un messaggio</div>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!IlForm.valid">Salva</button>
+</form>

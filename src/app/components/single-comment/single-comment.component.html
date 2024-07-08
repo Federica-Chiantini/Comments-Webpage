@@ -1,0 +1,17 @@
+<div *ngIf="Comment.length == 0">
+    <p>Non riusciamo a trovare i dati. Prova tra poco</p>
+    </div>
+
+<div *ngIf="Comment.length > 0">
+<div *ngFor="let s of Comment" class="border mt-2 mb-2 p-2">
+<h3>{{s.name}}</h3>
+<h5><span class="text-info-emphasis">Id:</span> {{s.id}}</h5>
+<h5 class="text-muted"><span class="text-info-emphasis h4">Email autore/autrice:</span> {{s.email}}</h5>
+<h5 class="text-muted"><span class="text-info-emphasis">Gruppo:</span> {{s.postId}}</h5>
+<p>{{s.body}}</p>
+</div>
+</div> 
+
+<hr>
+
+<h4 class="m-2 text-center">Se siete interessati ad aggiungere un nuovo post potete entrare <button type="button" class="btn btn-primary" routerLink="/comments/new">QUI</button></h4>
