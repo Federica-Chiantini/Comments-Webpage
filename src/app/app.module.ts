@@ -10,7 +10,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { SingleCommentComponent } from './components/single-comment/single-comment.component';
 
 import { provideHttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

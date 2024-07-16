@@ -1,26 +1,45 @@
 <h2 class="text-muted">Nuovo Post</h2>
+
 <form class="border p-2 mt-2 bg-secondary-subtle" (ngSubmit)="SendMyPost()" #IlForm="ngForm">
+
     <div class="mb-3">
         <label for="title" class="form-label">Titolo</label>
-        <input type="text" class="form-control" name="title" id="title" placeholder="Titolo del post" [(ngModel)]="newPost.name" required #inputTitle="ngModel" [ngClass]="{'is-invalid' : inputTitle.invalid && inputTitle.dirty,
-          'is-valid' : inputTitle.valid && inputTitle.dirty
-        }" pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'>
-        <div class="invalid-feedback" *ngIf="inputTitle.invalid">Inserisci un titolo</div>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Titolo del post" 
+        [(ngModel)]="newPost.name" required #inputTitle="ngModel" 
+        [ngClass]="{'is-invalid' : inputTitle.invalid && inputTitle.touched, 'is-valid' : inputTitle.valid && inputTitle.untouched}" 
+        pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'>
+
+        <ng-container  *ngIf="inputTitle.invalid && inputTitle.touched"><div class="invalid-feedback">Inserisci un titolo</div></ng-container>
       </div>
+      <!---->
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="newPost.email" required #inputEmail="ngModel"
-        [ngClass]="{'is-invalid' : inputEmail.invalid && inputEmail.dirty,
-          'is-valid' : inputEmail.valid && inputEmail.dirty
-        }" pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b">
-        <div class="invalid-feedback" *ngIf="inputEmail.invalid">Inserisci un indirizzo email</div>
+        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" 
+        [(ngModel)]="newPost.email" required #inputEmail="ngModel"
+        [ngClass]="{'is-invalid' : inputEmail.invalid && inputEmail.touched, 'is-valid' : inputEmail.valid && inputEmail.untouched}" 
+        pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b">
+
+        <ng-container *ngIf="inputEmail.errors && inputEmail.touched">
+          <div *ngIf="inputEmail.errors['required']" class="invalid-feedback">Inserisci un indirizzo email</div>
+          <div *ngIf="inputEmail.errors['pattern']" class="invalid-feedback">Indirizzo email NON valido</div>
+        </ng-container>
       </div>
+      <!---->
       <div class="mb-3">
         <label for="textarea" class="form-label">Testo</label>
-        <textarea class="form-control" id="textarea" name="textarea" placeholder="Messaggio..." rows="4" [(ngModel)]="newPost.body" required #inputBody="ngModel" [ngClass]="{'is-invalid' : inputBody.invalid && inputBody.dirty,
-        'is-valid' : inputBody.valid && inputBody.dirty
-      }" pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'></textarea>
-              <div class="invalid-feedback" *ngIf="inputBody.invalid">Inserisci un messaggio</div>
+        <textarea class="form-control" id="textarea" name="textarea" placeholder="Messaggio..." rows="4" [(ngModel)]="newPost.body" required 
+        #inputBody="ngModel" [ngClass]="{'is-invalid' : inputBody.invalid && inputBody.touched ,'is-valid' : inputBody.valid && inputBody.dirty}" 
+        pattern='[^"\\\r\n]*(?:\\.[^"\\\r\n]*)*'minlength="5"></textarea>
+
+        <ng-container *ngIf="inputBody.errors && inputBody.touched">
+          <div class="text-danger">
+              Inserisci almeno
+              {{ 
+                  inputBody.errors['minlength']['requiredLength']
+              }} caratteri
+          </div>
+      </ng-container>
       </div>
+      <!---->
       <button class="btn btn-primary" type="submit" [disabled]="!IlForm.valid">Salva</button>
 </form>

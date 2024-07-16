@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NewFormContentDTO } from '../../models/types';
 import { CommentsService } from '../../services/comments.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-comment',
@@ -12,13 +11,14 @@ export class NewCommentComponent {
   //template driven forms
   newPost : NewFormContentDTO  = new NewFormContentDTO( "", "", "");
 
-  constructor(private service : CommentsService, private route : Router){}
+  constructor(private service : CommentsService){}
 
   SendMyPost(){
-    this.service.addNewPost(this.newPost).subscribe( post => 
-    //this.newPost = new NewFormContentDTO("", "", "")
-    this.route.navigate([''])
-    )
+    //post collegato al mio server
+    /*this.service.addNewPost(this.newPost).subscribe( post => 
+    this.newPost = new NewFormContentDTO("", "", "")
+    )*/
+    this.newPost = new NewFormContentDTO("", "", "")
   }
 
 }
